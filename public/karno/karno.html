@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karno Haritası - Boolean Fonksiyon Sadeleştirici</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1><i class="fas fa-th"></i> Karno Haritası</h1>
+                <p>Boolean fonksiyonlarını görselleştirin ve sadeleştirin</p>
+                <div class="language-switcher">
+                    <a href="karno.html" class="lang-btn active">TR</a>
+                    <a href="karno-en.html" class="lang-btn">EN</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="controls">
+                <div class="variable-selector">
+                    <label for="variableCount">Değişken Sayısı:</label>
+                    <select id="variableCount">
+                        <option value="2">2 Değişken (A, B)</option>
+                        <option value="3">3 Değişken (A, B, C)</option>
+                        <option value="4" selected>4 Değişken (A, B, C, D)</option>
+                    </select>
+                </div>
+
+                <div class="input-methods">
+                    <button id="truthTableBtn" class="method-btn active">
+                        <i class="fas fa-table"></i> Doğruluk Tablosu
+                    </button>
+                    <button id="mintermsBtn" class="method-btn">
+                        <i class="fas fa-list"></i> Minterm Girişi
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="clearBtn" class="action-btn">
+                        <i class="fas fa-eraser"></i> Temizle
+                    </button>
+                    <button id="randomBtn" class="action-btn">
+                        <i class="fas fa-random"></i> Rastgele
+                    </button>
+                </div>
+            </div>
+
+            <div class="workspace">
+                <!-- Doğruluk Tablosu -->
+                <div class="input-panel">
+                    <div class="help-text">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Hücrelere tıklayarak değerler arasında geçiş yapın: <strong>0</strong> → <strong>1</strong> → <strong>X</strong> (don't care) → <strong>0</strong></span>
+                    </div>
+                    <div id="truthTablePanel" class="input-method active">
+                        <h3>Doğruluk Tablosu</h3>
+                        <div id="truthTableContainer"></div>
+                    </div>
+
+                    <div id="mintermsPanel" class="input-method">
+                        <h3>Minterm Girişi</h3>
+                        <div class="minterm-input">
+                            <label>Mintermler (virgülle ayırın):</label>
+                            <input type="text" id="mintermsInput" placeholder="Örnek: 0,1,5,7">
+                            <label>Don't Care Mintermler (virgülle ayırın):</label>
+                            <input type="text" id="dontCareInput" placeholder="Örnek: 2,3,6 (opsiyonel)">
+                            <button id="applyMinterms">Uygula</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Karno Haritası -->
+                <div class="karno-panel">
+                    <h3>Karno Haritası</h3>
+                    <div id="karnoMapContainer"></div>
+                    <div class="map-controls">
+                        <button id="findGroupsBtn" class="primary-btn">
+                            <i class="fas fa-search"></i> Grupları Bul
+                        </button>
+                        <button id="showSolutionBtn" class="primary-btn">
+                            <i class="fas fa-lightbulb"></i> Çözümü Göster
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results">
+                <!-- Bulunan Gruplar -->
+                <div class="groups-panel">
+                    <h3>Bulunan Gruplar</h3>
+                    <div id="groupsList"></div>
+                </div>
+
+                <!-- Sadeleştirilmiş Fonksiyon -->
+                <div class="solution-panel">
+                    <h3>Sadeleştirilmiş Fonksiyon</h3>
+                    <div id="solutionDisplay"></div>
+                    <div class="solution-stats">
+                        <span id="termCount">Terim sayısı: 0</span>
+                        <span id="literalCount">Literal sayısı: 0</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Paralaks efektli mantıksal kapı şeması bölümü -->
+        <section class="circuit-section parallax">
+            <div class="circuit-overlay">
+                <h2 class="section-title">Mantıksal Kapı Şeması</h2>
+                <p class="section-description">Optimize edilmiş devre tasarımınız</p>
+                <div class="circuit-panel">
+                    <div class="circuit-container">
+                        <div id="circuitDisplay" class="circuit-diagram">
+                            <!-- Devre şeması buraya gelecek -->
+                        </div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" id="zoomOut">-</button>
+                            <span class="zoom-text">100%</span>
+                            <button class="zoom-btn" id="zoomIn">+</button>
+                        </div>
+                        <div class="circuit-controls">
+                            <button id="showCircuitBtn" class="secondary-btn">
+                                <i class="fas fa-sitemap"></i> Kapı Şemasını Göster
+                            </button>
+                            <button id="toggleCircuitStyle" class="secondary-btn">
+                                <i class="fas fa-exchange-alt"></i> Görünüm Değiştir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Karno Haritası Web Uygulaması</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

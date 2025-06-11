@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karno Debug</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .log { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffebee; }
+        .success { background: #e8f5e8; }
+    </style>
+</head>
+<body>
+    <h1>Karno Haritası Debug Sayfası</h1>
+    
+    <div id="logs"></div>
+    
+    <!-- Karno sayfasının DOM yapısını test et -->
+    <div id="truthTableContainer">Truth Table Container</div>
+    <div id="karnoMapContainer">Karno Map Container</div>
+    <select id="variableCount">
+        <option value="4">4 Variables</option>
+    </select>
+    <button id="truthTableBtn">Truth Table</button>
+    <button id="mintermsBtn">Minterms</button>
+    
+    <script>
+        const logs = document.getElementById('logs');
+        
+        function addLog(message, type = 'log') {
+            const div = document.createElement('div');
+            div.className = `log ${type}`;
+            div.textContent = new Date().toLocaleTimeString() + ': ' + message;
+            logs.appendChild(div);
+            console.log(message);
+        }
+        
+        addLog('Debug sayfası yüklendi');
+        
+        // CSS yükle
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/karno/styles.css';
+        link.onload = () => addLog('CSS yüklendi', 'success');
+        link.onerror = () => addLog('CSS yüklenemedi', 'error');
+        document.head.appendChild(link);
+        
+        // Script yükle
+        setTimeout(() => {
+            const script = document.createElement('script');
+            script.src = '/karno/script.js';
+            script.onload = () => {
+                addLog('Script yüklendi', 'success');
+                
+                setTimeout(() => {
+                    if (window.KarnoMap) {
+                        addLog('KarnoMap sınıfı bulundu', 'success');
+                        try {
+                            window.testApp = new window.KarnoMap();
+                            addLog('KarnoMap başarıyla başlatıldı!', 'success');
+                        } catch (error) {
+                            addLog('KarnoMap başlatılırken hata: ' + error.message, 'error');
+                        }
+                    } else {
+                        addLog('KarnoMap sınıfı bulunamadı', 'error');
+                    }
+                }, 500);
+            };
+            script.onerror = () => addLog('Script yüklenemedi', 'error');
+            document.body.appendChild(script);
+        }, 1000);
+        
+    </script>
+</body>
+</html>
